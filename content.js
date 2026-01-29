@@ -67,7 +67,6 @@ function extractData() {
             let scoreVal = 0;
             let dataType = 'unknown'; // 'numeric' | 'pass' | 'fail'
 
-            // 1. 文本判定
             if (scoreText.includes('未通过') || scoreText.includes('缺考')) {
                 dataType = 'fail';
                 isEarned = false;
@@ -105,10 +104,10 @@ function calculateStats(data) {
     let stats = {
         all: { weightedSum: 0, credit: 0 },
         degree: { weightedSum: 0, credit: 0 },
-        creditDist: {}, // 学分分布 { "核心": 10, "通识": 5 }
+        creditDist: {},
         totalEarned: 0,
-        semestersAll: {},   // 学期统计（综合）
-        semestersDegree: {} // 学期统计（学位：通修+平台+核心）
+        semestersAll: {},
+        semestersDegree: {}
     };
 
     const degreeRegex = /通修|平台|核心/;
@@ -229,7 +228,7 @@ function updateDashboard(data) {
 
     // 生成“学分分类详情”的 HTML 列表（固定顺序 + 颜色与饼图一致 + 字号提升）
     const fixedOrder = ['通修', '平台', '核心', '通识', '选修'];
-    const palette = ['#4CAF50', '#2196F3', '#FFC107', '#9C27B0', '#00BCD4']; // 与饼图一致，未完成使用灰色
+    const palette = ['#4CAF50', '#2196F3', '#FFC107', '#9C27B0', '#00BCD4'];
     let distHtml = '';
     fixedOrder.forEach((type, idx) => {
         const color = palette[idx % palette.length];
@@ -267,11 +266,11 @@ function updateDashboard(data) {
                 <div style="height: 160px; width: 160px; position: relative;">
                     <canvas id="credit-progress-chart"></canvas>
                     <div style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); text-align:center;">
-                        <div style="font-size:12px; color:#999;">已修 / 目标</div>
+                        <div style="font-size:12px; color:#999;">已修 / 总学分</div>
                         <div style="font-size:18px; font-weight:bold; color:#333;">${stats.totalEarned} / ${CONFIG.graduationGoal}</div>
                     </div>
                 </div>
-                <div style="margin-top:5px; font-size:12px; color:#666;">毕业进度</div>
+                <div style="margin-top:5px; font-size:12px; color:#666;">学分完成进度</div>
             </div>
 
             <!-- 中右：学分构成 -->
@@ -299,7 +298,7 @@ function updateDashboard(data) {
             <span style="margin: 0 10px;">|</span>
             <span>一定要达到和超过转群先进水平</span>
             <span style="margin: 0 10px;">|</span>
-            <a href="#" style="color: #2196F3; text-decoration: none;">项目主页</a>
+            <a href="https://github.com/YifeiZhang0508/SmewinGPAPlug-in" style="color: #2196F3; text-decoration: none;">项目Github主页</a>
         </div>
         
         <button id="close-btn" style="position:absolute; top:10px; right:10px; border:none; background:none; cursor:pointer; font-size:20px; color:#ccc;">×</button>
@@ -351,9 +350,9 @@ function renderProgressChart(distData, totalEarned) {
         options: {
             responsive: true,
             maintainAspectRatio: false,
-            cutout: '70%', // 环稍微细一点，中间留给文字
+            cutout: '70%',
             plugins: {
-                legend: { display: false }, // 隐藏图例，因为旁边有文字列表了
+                legend: { display: false },
                 tooltip: {
                     callbacks: {
                         label: function(context) {
