@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "转工管群成绩可视化插件",
-  "version": "0.1",
+  "version": "1.0",
   "description": "转工管群ISGSNSG 一定要达到和超过转群先进水平",
   "permissions": ["activeTab"], 
   "content_scripts": [

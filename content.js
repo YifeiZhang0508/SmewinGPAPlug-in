@@ -11,7 +11,8 @@ const CONFIG = {
         name: 1,       // 课程名
         credit: 3,     // 学分
         courseType: 4, // 课程性质
-        score: 5       // 总成绩
+        score: 5,       // 总成绩
+        note: 6        // 备注
     },
 
     graduationGoal: 150,
@@ -57,6 +58,7 @@ function extractData() {
             const scoreText = cells[CONFIG.colIndex.score]?.innerText.trim();
             const creditText = cells[CONFIG.colIndex.credit]?.innerText.trim();
             const typeText = cells[CONFIG.colIndex.courseType]?.innerText.trim() || "其他";
+            const noteText = cells[CONFIG.colIndex.note]?.innerText.trim();
 
             const credit = parseFloat(creditText);
 
@@ -89,7 +91,8 @@ function extractData() {
                 credit: credit,
                 courseType: typeText,
                 dataType: dataType,
-                isEarned: isEarned
+                isEarned: isEarned,
+                note: noteText
             });
         }
     });
@@ -113,6 +116,8 @@ function calculateStats(data) {
     const degreeRegex = /通修|平台|核心/;
 
     data.forEach(item => {
+        if (item.note === "无效") return;
+
         // 只有拿到学分的课，才统计进“分布”和“总学分”
         if (item.isEarned) {
             stats.totalEarned += item.credit;
@@ -448,6 +453,27 @@ function renderGpaTrendChart(trendData, mode) {
         }
     });
 }
+
+// ==========================================
+// 5-0. 消息监听 (用于重新显示面板)
+// ==========================================
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    if (request.action === "show_panel") {
+        const panel = document.getElementById('grade-analysis-panel');
+        if (panel) {
+            panel.style.display = 'flex';
+        } else {
+            // 尝试手动触发一次提取
+            const currentData = extractData();
+            if (currentData && currentData.length > 0) {
+                updateDashboard(currentData);
+            } else {
+                alert("当前页面未检测到成绩数据，请确认是否在成绩查询页面。");
+            }
+        }
+        sendResponse({status: "ok"});
+    }
+});
 
 // ==========================================
 // 5. 启动器
