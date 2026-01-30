@@ -303,7 +303,9 @@ function updateDashboard(data) {
             <span style="margin: 0 10px;">|</span>
             <span>一定要达到和超过转群先进水平</span>
             <span style="margin: 0 10px;">|</span>
-            <a href="https://github.com/YifeiZhang0508/SmewinGPAPlug-in" style="color: #2196F3; text-decoration: none;">项目Github主页</a>
+            <a href="http://smewin.yifeizhang.top/SmewinSoftware_GPA.html" style="color: #2196F3; text-decoration: none;">项目介绍</a>
+            <span style="margin: 0 10px;">|</span>
+            <a href="https://github.com/YifeiZhang0508/SmewinGPAPlug-in" style="color: #2196F3; text-decoration: none;">Github主页</a>
         </div>
         
         <button id="close-btn" style="position:absolute; top:10px; right:10px; border:none; background:none; cursor:pointer; font-size:20px; color:#ccc;">×</button>
