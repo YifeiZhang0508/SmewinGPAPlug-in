@@ -1,5 +1,5 @@
 //转工管群成绩可视化插件
-//转工管群ISGSNSG 一定要达到和超过转群先进水平
+//转工管群ISGSNSG 一定要赶上和超过转群先进水平
 
 // ==========================================
 // 1. 核心配置
@@ -301,7 +301,7 @@ function updateDashboard(data) {
         <div style="flex: 0 0 30px; width: 100%; display: flex; align-items: center; justify-content: center; border-top: 1px solid #eee; margin-top: 10px; font-size: 12px; color: #999;">
             <span>转工管群ISGSNSG</span>
             <span style="margin: 0 10px;">|</span>
-            <span>一定要达到和超过转群先进水平</span>
+            <span>一定要赶上和超过转群先进水平</span>
             <span style="margin: 0 10px;">|</span>
             <a href="http://smewin.yifeizhang.top/SmewinSoftware_GPA.html" style="color: #2196F3; text-decoration: none;">项目介绍</a>
             <span style="margin: 0 10px;">|</span>
